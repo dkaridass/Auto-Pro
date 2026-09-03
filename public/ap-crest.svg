@@ -1,0 +1,191 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <!-- Multi-stop luxury metallic gold linear gradient for the primary emblem -->
+    <linearGradient id="apGoldLinear" x1="15%" y1="5%" x2="85%" y2="95%">
+      <stop offset="0%" stop-color="#FDF3CD" />
+      <stop offset="12%" stop-color="#F2D272" />
+      <stop offset="28%" stop-color="#DFB84F" />
+      <stop offset="48%" stop-color="#C29433" />
+      <stop offset="68%" stop-color="#8E671D" />
+      <stop offset="84%" stop-color="#DFB84F" />
+      <stop offset="94%" stop-color="#F5DB88" />
+      <stop offset="100%" stop-color="#7A5214" />
+    </linearGradient>
+
+    <!-- Horizontal metallic reflection gradient -->
+    <linearGradient id="apGoldReflect" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#C29433" />
+      <stop offset="20%" stop-color="#F8E5A0" />
+      <stop offset="40%" stop-color="#E1BA54" />
+      <stop offset="50%" stop-color="#885E18" />
+      <stop offset="60%" stop-color="#E1BA54" />
+      <stop offset="80%" stop-color="#FDF3CD" />
+      <stop offset="100%" stop-color="#C29433" />
+    </linearGradient>
+
+    <!-- Top-to-bottom rim lighting -->
+    <linearGradient id="apRimLight" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8E1" stop-opacity="0.9" />
+      <stop offset="30%" stop-color="#ECC665" stop-opacity="0.6" />
+      <stop offset="70%" stop-color="#916B20" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#543708" stop-opacity="0.8" />
+    </linearGradient>
+
+    <!-- Bevel highlight along strokes -->
+    <linearGradient id="apBevelStroke" x1="30%" y1="0%" x2="70%" y2="100%">
+      <stop offset="0%" stop-color="#FFFDF5" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#D6AD44" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#5E3E0B" stop-opacity="0.7" />
+    </linearGradient>
+
+    <!-- Drop shadow filter for authentic automotive crest badge presence -->
+    <filter id="apBadgeDepth" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000000" flood-opacity="0.7" />
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#FFEBB0" flood-opacity="0.25" />
+    </filter>
+  </defs>
+
+  <!-- Deep Obsidian Black Background -->
+  <rect width="500" height="500" fill="#000000" />
+
+  <g filter="url(#apBadgeDepth)">
+    <!-- 1. SHIELD RIM / ESCUTCHEON FRAME -->
+    <!--
+      Outer Shield geometry:
+      - Top center crest: (250, 72)
+      - Top arch sweeps outwards to rounded shoulders: (396, 162) and (104, 162)
+      - Flanks taper inwards with smooth tension towards the bottom point: (250, 432)
+      Inner Cutout geometry:
+      - Even rim thickness (~26px): top at (250, 98), shoulders at (370, 176) and (130, 176), bottom at (250, 404)
+    -->
+    <path 
+      fill="url(#apGoldLinear)" 
+      fill-rule="evenodd"
+      d="
+        M 250,72 
+        C 328,75 392,106 396,162 
+        C 400,246 346,342 250,432 
+        C 154,342 100,246 104,162 
+        C 108,106 172,75 250,72 
+        Z
+        M 250,98 
+        C 180,101 130,129 126,176 
+        C 123,245 170,326 250,404 
+        C 330,326 377,245 374,176 
+        C 370,129 320,101 250,98 
+        Z
+      " 
+    />
+
+    <!-- Shield Outer Rim Highlight Stroke -->
+    <path 
+      d="
+        M 250,73 
+        C 327,76 390,107 394,162 
+        C 398,245 345,340 250,430 
+        C 155,340 102,245 106,162 
+        C 110,107 173,76 250,73
+      " 
+      fill="none" 
+      stroke="url(#apRimLight)" 
+      stroke-width="1.8" 
+      stroke-linecap="round"
+      opacity="0.85"
+    />
+
+    <!-- Shield Inner Rim Inset Stroke -->
+    <path 
+      d="
+        M 250,99 
+        C 181,102 132,130 128,176 
+        C 125,244 171,324 250,402 
+        C 329,324 375,244 372,176 
+        C 368,130 319,102 250,99
+      " 
+      fill="none" 
+      stroke="url(#apBevelStroke)" 
+      stroke-width="1.2" 
+      opacity="0.6"
+    />
+
+    <!-- 2. CENTRAL MONOGRAM: INTERLOCKING "A" AND "P" -->
+    <!-- Center divider width: 14px (gap from x=243 to x=257) -->
+
+    <!-- LETTER "A" (LEFT HALF) -->
+    <!--
+      Outer Left Arm:
+      - Top curve: (243, 114) arching leftwards following the inner top shield curve to (148, 185)
+      - Down the flank to (168, 332)
+      - Bottom angled foot: (168, 332) to (188, 346) to (200, 314)
+      - Connecting to horizontal crossbar at y=238..266
+      - Center vertical stem: width 29px (x=214 to x=243), running from y=114 down to y=384
+      - Bottom tip of center stem chamfered towards the bottom point: (243, 384) to (214, 376)
+      - Inner counter (triangle): top at (214, 168), left diagonal to (186, 238), bottom to (214, 238)
+    -->
+    <path 
+      fill="url(#apGoldLinear)" 
+      fill-rule="evenodd"
+      d="
+        M 243,114 
+        L 243,384 
+        L 214,375 
+        L 214,266 
+        L 186,266 
+        L 168,336 
+        C 162,324 156,310 151,294 
+        L 174,238 
+        L 214,238 
+        L 214,152 
+        C 192,160 170,175 152,198 
+        C 147,188 145,178 145,170 
+        C 166,142 201,122 243,114 
+        Z
+        M 214,180 
+        L 214,212 
+        L 183,212 
+        C 193,198 203,189 214,180 
+        Z
+      " 
+    />
+
+    <!-- LETTER "P" (RIGHT HALF) -->
+    <!--
+      - Center vertical stem: width 29px (x=257 to x=286), running from y=114 down to y=384
+      - Bottom tip of stem chamfered: (257, 384) to (286, 375)
+      - Upper bowl of P:
+        - Curves out from (257, 114) following the top-right inner shield contour through (355, 170)
+        - Curves down and inward around (352, 218)
+        - Horizontal return bar at y=238..266 meeting the vertical stem at x=286
+      - Inner counter hole of P:
+        - Left edge: x=286 (from y=148 to y=232)
+        - Top & right curve: from (286, 148) curving out to (326, 190) down to (286, 232)
+    -->
+    <path 
+      fill="url(#apGoldLinear)" 
+      fill-rule="evenodd"
+      d="
+        M 257,114 
+        C 299,122 334,142 355,170 
+        C 355,178 353,188 348,198 
+        C 330,175 308,160 286,152 
+        L 286,238 
+        L 318,238 
+        C 328,238 338,232 344,222 
+        C 350,212 352,198 352,185 
+        C 352,175 350,165 346,156 
+        C 352,168 355,182 355,195 
+        C 355,218 342,246 322,258 
+        C 310,265 298,266 286,266 
+        L 286,375 
+        L 257,384 
+        Z
+        M 286,176 
+        C 298,176 312,184 318,195 
+        C 324,206 324,218 316,226 
+        C 310,232 300,234 286,234 
+        Z
+      " 
+    />
+
+  </g>
+</svg>
