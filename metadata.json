@@ -1,6 +1,0 @@
-{
-  "name": "Auto Pro DRC",
-  "description": "Concessionnaire automobile à Lubumbashi, Haut-Katanga, RDC. Véhicules neufs et récents, 4x4, pick-ups, blindés VR7, dédouanement DGDA et service officiel.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useId } from 'react';
 
 interface AutoProLogoProps {
   className?: string;
@@ -10,6 +10,10 @@ export const AutoProLogo: React.FC<AutoProLogoProps> = ({
   className = 'w-10 h-11',
   withText = false,
 }) => {
+  const uid = useId().replace(/:/g, '');
+  const goldId = `apLogoGoldLinear-${uid}`;
+  const rimId = `apLogoRimLight-${uid}`;
+  const bevelId = `apLogoBevel-${uid}`;
   return (
     <div className={`inline-flex items-center gap-3.5 ${withText ? '' : ''}`}>
       {/* The Official Auto Pro DRC Shield Emblem */}
@@ -22,7 +26,7 @@ export const AutoProLogo: React.FC<AutoProLogoProps> = ({
         >
           <defs>
             {/* Multi-stop luxury metallic gold linear gradient */}
-            <linearGradient id="apLogoGoldLinear" x1="12%" y1="6%" x2="88%" y2="94%">
+            <linearGradient id={goldId} x1="12%" y1="6%" x2="88%" y2="94%">
               <stop offset="0%" stopColor="#FFF2BF" />
               <stop offset="14%" stopColor="#F5D474" />
               <stop offset="28%" stopColor="#E2BB53" />
@@ -34,7 +38,7 @@ export const AutoProLogo: React.FC<AutoProLogoProps> = ({
             </linearGradient>
 
             {/* Specular rim highlight */}
-            <linearGradient id="apLogoRimLight" x1="50%" y1="0%" x2="50%" y2="100%">
+            <linearGradient id={rimId} x1="50%" y1="0%" x2="50%" y2="100%">
               <stop offset="0%" stopColor="#FFFBEB" stopOpacity="0.95" />
               <stop offset="30%" stopColor="#F0CE72" stopOpacity="0.7" />
               <stop offset="70%" stopColor="#966F21" stopOpacity="0.4" />
@@ -42,7 +46,7 @@ export const AutoProLogo: React.FC<AutoProLogoProps> = ({
             </linearGradient>
 
             {/* Bevel stroke lighting */}
-            <linearGradient id="apLogoBevel" x1="25%" y1="0%" x2="75%" y2="100%">
+            <linearGradient id={bevelId} x1="25%" y1="0%" x2="75%" y2="100%">
               <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.8" />
               <stop offset="45%" stopColor="#E0B74C" stopOpacity="0.4" />
               <stop offset="100%" stopColor="#5E3D0A" stopOpacity="0.75" />
@@ -51,7 +55,7 @@ export const AutoProLogo: React.FC<AutoProLogoProps> = ({
 
           {/* 1. OUTER SHIELD CREST RIM */}
           <path
-            fill="url(#apLogoGoldLinear)"
+            fill={`url(#${goldId})`}
             fillRule="evenodd"
             d="
               M 250,68 
@@ -78,7 +82,7 @@ export const AutoProLogo: React.FC<AutoProLogoProps> = ({
               C 153,346 99,247 104,160 
               C 108,105 167,73 250,70
             "
-            stroke="url(#apLogoRimLight)"
+            stroke={`url(#${rimId})`}
             strokeWidth="1.8"
             strokeLinecap="round"
           />
@@ -92,14 +96,14 @@ export const AutoProLogo: React.FC<AutoProLogoProps> = ({
               C 329,330 375,245 372,176 
               C 369,130 319,102 250,99
             "
-            stroke="url(#apLogoBevel)"
+            stroke={`url(#${bevelId})`}
             strokeWidth="1.2"
           />
 
           {/* 2. CENTRAL MONOGRAM: INTERLOCKING 'A' AND 'P' */}
           {/* LETTER 'A' (LEFT) */}
           <path
-            fill="url(#apLogoGoldLinear)"
+            fill={`url(#${goldId})`}
             fillRule="evenodd"
             d="
               M 242.5,114 
@@ -126,7 +130,7 @@ export const AutoProLogo: React.FC<AutoProLogoProps> = ({
 
           {/* LETTER 'P' (RIGHT) */}
           <path
-            fill="url(#apLogoGoldLinear)"
+            fill={`url(#${goldId})`}
             fillRule="evenodd"
             d="
               M 257.5,114 

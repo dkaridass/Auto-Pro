@@ -3,6 +3,8 @@
 import React, { useState, useEffect, useRef, useSyncExternalStore } from 'react';
 import Image from 'next/image';
 import { AutoProLogo } from '@/components/AutoProLogo';
+import LubumbashiClock from '@/components/LubumbashiClock';
+import MobileNav from '@/components/MobileNav';
 
 const emptySubscribe = () => () => {};
 
@@ -198,7 +200,6 @@ export default function AutoProDRCPage() {
   const [activeDossier, setActiveDossier] = useState<Vehicle | null>(null);
   const [cameraOrbit, setCameraOrbit] = useState('45deg 75deg 105%');
   const [isAutoRotate, setIsAutoRotate] = useState(true);
-  const [lubumbashiTime, setLubumbashiTime] = useState('');
   const [inquiryMarque, setInquiryMarque] = useState(VEHICLES[0].name);
   const [customRequestText, setCustomRequestText] = useState('');
 
@@ -215,28 +216,20 @@ export default function AutoProDRCPage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Lubumbashi Local Time
+  // Car detail modal: Esc to close + lock background scroll
   useEffect(() => {
-    const updateTime = () => {
-      try {
-        const now = new Date();
-        const formatted = new Intl.DateTimeFormat('en-GB', {
-          timeZone: 'Africa/Lubumbashi',
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
-          hour12: false,
-        }).format(now);
-        setLubumbashiTime(formatted);
-      } catch {
-        const now = new Date();
-        setLubumbashiTime(now.toTimeString().slice(0, 8));
-      }
+    if (!activeDossier) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setActiveDossier(null);
     };
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [activeDossier]);
 
   // Filter vehicles
   const filteredVehicles = selectedFilter === 'all'
@@ -291,13 +284,13 @@ export default function AutoProDRCPage() {
         <div className="max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between">
           
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3 group focus:outline-none" aria-label="Auto Pro DRC Accueil">
+          <a href="#" className="flex items-center gap-2 sm:gap-3 group focus:outline-none min-w-0" aria-label="Auto Pro DRC Accueil">
             <AutoProLogo className="w-10 h-10 transition-transform duration-300 group-hover:scale-105" />
-            <div className="flex flex-col">
-              <span className="font-display text-base sm:text-lg tracking-[0.25em] font-semibold text-[#F4F1EA] uppercase">
+            <div className="flex flex-col min-w-0">
+              <span className="font-display text-sm sm:text-lg tracking-[0.16em] sm:tracking-[0.25em] whitespace-nowrap font-semibold text-[#F4F1EA] uppercase">
                 AUTO PRO <span className="text-[#C9A24B]">DRC</span>
               </span>
-              <span className="text-[10px] uppercase tracking-[0.2em] text-[#A8A398]">
+              <span className="hidden sm:block text-[10px] uppercase tracking-[0.2em] text-[#A8A398]">
                 Concessionnaire Automobile • Lubumbashi
               </span>
             </div>
@@ -320,15 +313,16 @@ export default function AutoProDRCPage() {
           </nav>
 
           {/* Direct WhatsApp Callout */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 shrink-0">
             <a
               href="https://wa.me/243992099990"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center px-4 py-2 text-xs tracking-[0.2em] uppercase text-[#070707] bg-[#C9A24B] hover:bg-[#EBD699] font-semibold transition-all duration-300 shadow-[0_0_20px_rgba(201,162,75,0.2)]"
+              className="hidden sm:inline-flex items-center justify-center min-h-11 md:min-h-0 px-4 py-2 text-xs tracking-[0.2em] uppercase text-[#070707] bg-[#C9A24B] hover:bg-[#EBD699] font-semibold transition-all duration-300 shadow-[0_0_20px_rgba(201,162,75,0.2)]"
             >
               WhatsApp Direct
             </a>
+            <MobileNav />
           </div>
 
         </div>
@@ -369,13 +363,13 @@ export default function AutoProDRCPage() {
               <div className="pt-2 flex flex-wrap items-center gap-3">
                 <a
                   href="#inventory"
-                  className="inline-flex items-center justify-center px-6 py-3 text-xs tracking-[0.22em] uppercase bg-[#C9A24B] hover:bg-[#EBD699] text-[#070707] font-semibold transition-all shadow-[0_0_20px_rgba(201,162,75,0.2)]"
+                  className="inline-flex items-center justify-center min-h-11 md:min-h-0 px-6 py-3 text-xs tracking-[0.22em] uppercase bg-[#C9A24B] hover:bg-[#EBD699] text-[#070707] font-semibold transition-all shadow-[0_0_20px_rgba(201,162,75,0.2)]"
                 >
                   Voir le Stock Disponible
                 </a>
                 <a
                   href="#contact"
-                  className="inline-flex items-center justify-center px-6 py-3 text-xs tracking-[0.22em] uppercase border border-[#C9A24B]/40 hover:border-[#C9A24B] text-[#F4F1EA] hover:text-[#C9A24B] transition-colors"
+                  className="inline-flex items-center justify-center min-h-11 md:min-h-0 px-6 py-3 text-xs tracking-[0.22em] uppercase border border-[#C9A24B]/40 hover:border-[#C9A24B] text-[#F4F1EA] hover:text-[#C9A24B] transition-colors"
                 >
                   Contacter le Showroom
                 </a>
@@ -436,26 +430,26 @@ export default function AutoProDRCPage() {
                   <div className="flex items-center space-x-1">
                     <button
                       onClick={() => handleSetCamera('45deg 75deg 105%')}
-                      className={`px-2 py-0.5 transition-colors ${cameraOrbit.startsWith('45deg') ? 'bg-[#C9A24B]/20 text-[#C9A24B] border border-[#C9A24B]/40' : 'text-[#A8A398] hover:text-[#F4F1EA]'}`}
+                      className={`min-h-11 md:min-h-0 px-2 py-0.5 transition-colors ${cameraOrbit.startsWith('45deg') ? 'bg-[#C9A24B]/20 text-[#C9A24B] border border-[#C9A24B]/40' : 'text-[#A8A398] hover:text-[#F4F1EA]'}`}
                     >
                       3/4 Face
                     </button>
                     <button
                       onClick={() => handleSetCamera('90deg 80deg 110%')}
-                      className={`px-2 py-0.5 transition-colors ${cameraOrbit.startsWith('90deg') ? 'bg-[#C9A24B]/20 text-[#C9A24B] border border-[#C9A24B]/40' : 'text-[#A8A398] hover:text-[#F4F1EA]'}`}
+                      className={`min-h-11 md:min-h-0 px-2 py-0.5 transition-colors ${cameraOrbit.startsWith('90deg') ? 'bg-[#C9A24B]/20 text-[#C9A24B] border border-[#C9A24B]/40' : 'text-[#A8A398] hover:text-[#F4F1EA]'}`}
                     >
                       Profil
                     </button>
                     <button
                       onClick={() => handleSetCamera('0deg 75deg 100%')}
-                      className={`px-2 py-0.5 transition-colors ${cameraOrbit.startsWith('0deg') ? 'bg-[#C9A24B]/20 text-[#C9A24B] border border-[#C9A24B]/40' : 'text-[#A8A398] hover:text-[#F4F1EA]'}`}
+                      className={`min-h-11 md:min-h-0 px-2 py-0.5 transition-colors ${cameraOrbit.startsWith('0deg') ? 'bg-[#C9A24B]/20 text-[#C9A24B] border border-[#C9A24B]/40' : 'text-[#A8A398] hover:text-[#F4F1EA]'}`}
                     >
                       Face
                     </button>
                   </div>
                   <button
                     onClick={() => setIsAutoRotate(!isAutoRotate)}
-                    className={`px-2 py-0.5 font-mono ${isAutoRotate ? 'text-[#C9A24B] font-semibold' : 'text-[#8E8A80]'}`}
+                    className={`min-h-11 md:min-h-0 px-2 py-0.5 font-mono ${isAutoRotate ? 'text-[#C9A24B] font-semibold' : 'text-[#8E8A80]'}`}
                   >
                     {isAutoRotate ? '● Rotation' : '○ Pause'}
                   </button>
@@ -507,7 +501,7 @@ export default function AutoProDRCPage() {
           <div className="flex items-center space-x-2 text-[#B5B0A4] tracking-wider text-[11px]">
             <span className="w-2 h-2 rounded-full bg-[#C9A24B] animate-pulse"></span>
             <span>Lubumbashi :</span>
-            <span className="font-mono text-[#F4F1EA] font-semibold" suppressHydrationWarning>{lubumbashiTime || 'CAT (UTC+2)'}</span>
+            <LubumbashiClock />
           </div>
 
           <div className="text-[11px] tracking-wider text-[#A8A398]">
@@ -557,7 +551,7 @@ export default function AutoProDRCPage() {
             <div className="flex flex-wrap items-center gap-2 text-xs tracking-wider uppercase">
               <button
                 onClick={() => setSelectedFilter('all')}
-                className={`px-3.5 py-1.5 transition-all ${
+                className={`min-h-11 md:min-h-0 px-3.5 py-1.5 transition-all ${
                   selectedFilter === 'all'
                     ? 'bg-[#C9A24B] text-[#070707] font-semibold'
                     : 'text-[#B5B0A4] hover:text-[#F4F1EA] border border-white/10'
@@ -567,7 +561,7 @@ export default function AutoProDRCPage() {
               </button>
               <button
                 onClick={() => setSelectedFilter('suv')}
-                className={`px-3.5 py-1.5 transition-all ${
+                className={`min-h-11 md:min-h-0 px-3.5 py-1.5 transition-all ${
                   selectedFilter === 'suv'
                     ? 'bg-[#C9A24B] text-[#070707] font-semibold'
                     : 'text-[#B5B0A4] hover:text-[#F4F1EA] border border-white/10'
@@ -577,7 +571,7 @@ export default function AutoProDRCPage() {
               </button>
               <button
                 onClick={() => setSelectedFilter('truck')}
-                className={`px-3.5 py-1.5 transition-all ${
+                className={`min-h-11 md:min-h-0 px-3.5 py-1.5 transition-all ${
                   selectedFilter === 'truck'
                     ? 'bg-[#C9A24B] text-[#070707] font-semibold'
                     : 'text-[#B5B0A4] hover:text-[#F4F1EA] border border-white/10'
@@ -587,7 +581,7 @@ export default function AutoProDRCPage() {
               </button>
               <button
                 onClick={() => setSelectedFilter('armoured')}
-                className={`px-3.5 py-1.5 transition-all ${
+                className={`min-h-11 md:min-h-0 px-3.5 py-1.5 transition-all ${
                   selectedFilter === 'armoured'
                     ? 'bg-[#C9A24B] text-[#070707] font-semibold'
                     : 'text-[#B5B0A4] hover:text-[#F4F1EA] border border-white/10'
@@ -597,7 +591,7 @@ export default function AutoProDRCPage() {
               </button>
               <button
                 onClick={() => setSelectedFilter('luxury')}
-                className={`px-3.5 py-1.5 transition-all ${
+                className={`min-h-11 md:min-h-0 px-3.5 py-1.5 transition-all ${
                   selectedFilter === 'luxury'
                     ? 'bg-[#C9A24B] text-[#070707] font-semibold'
                     : 'text-[#B5B0A4] hover:text-[#F4F1EA] border border-white/10'
@@ -672,13 +666,13 @@ export default function AutoProDRCPage() {
                     <div className="flex items-center space-x-2">
                       <button
                         onClick={() => setActiveDossier(car)}
-                        className="px-3 py-1.5 text-[11px] tracking-wider uppercase border border-white/20 hover:border-[#C9A24B] text-[#E5E0D5] hover:text-[#C9A24B] transition-colors"
+                        className="min-h-11 md:min-h-0 px-3 py-1.5 text-[11px] tracking-wider uppercase border border-white/20 hover:border-[#C9A24B] text-[#E5E0D5] hover:text-[#C9A24B] transition-colors"
                       >
                         Fiche
                       </button>
                       <button
                         onClick={() => handleWhatsAppInquiry(car.name)}
-                        className="px-3.5 py-1.5 text-[11px] tracking-wider uppercase bg-[#C9A24B] hover:bg-[#EBD699] text-[#070707] font-semibold transition-colors"
+                        className="min-h-11 md:min-h-0 px-3.5 py-1.5 text-[11px] tracking-wider uppercase bg-[#C9A24B] hover:bg-[#EBD699] text-[#070707] font-semibold transition-colors"
                       >
                         Contacter
                       </button>
@@ -816,7 +810,7 @@ export default function AutoProDRCPage() {
                 </span>
                 <button
                   onClick={() => handleWhatsAppInquiry('Toyota Land Cruiser 300 Blindé B6')}
-                  className="px-6 py-3 bg-[#C9A24B] hover:bg-[#EBD699] text-[#070707] text-xs uppercase tracking-wider font-semibold transition-colors w-full sm:w-auto text-center"
+                  className="min-h-11 md:min-h-0 px-6 py-3 bg-[#C9A24B] hover:bg-[#EBD699] text-[#070707] text-xs uppercase tracking-wider font-semibold transition-colors w-full sm:w-auto text-center"
                 >
                   Demander une Fiche Blindage
                 </button>
@@ -982,7 +976,7 @@ export default function AutoProDRCPage() {
                       const note = customRequestText ? ` (Note: ${customRequestText})` : '';
                       handleWhatsAppInquiry(`${inquiryMarque}${note}`);
                     }}
-                    className="w-full py-3.5 bg-[#C9A24B] hover:bg-[#EBD699] text-[#070707] font-semibold text-xs uppercase tracking-wider transition-all"
+                    className="w-full min-h-11 py-3.5 bg-[#C9A24B] hover:bg-[#EBD699] text-[#070707] font-semibold text-xs uppercase tracking-wider transition-all"
                   >
                     Envoyer ma Demande via WhatsApp
                   </button>
@@ -1041,21 +1035,31 @@ export default function AutoProDRCPage() {
       {/* VEHICLE DETAILS MODAL (NO PRICE)                          */}
       {/* ========================================================= */}
       {activeDossier && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm">
-          <div className="relative w-full max-w-xl bg-[#0d0d0d] border border-[#C9A24B]/50 p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setActiveDossier(null);
+          }}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="dossier-title"
+            className="relative w-full max-w-xl bg-[#0d0d0d] border border-[#C9A24B]/50 p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
             
             <div className="flex items-start justify-between border-b border-[#C9A24B]/20 pb-3 mb-4">
               <div>
                 <span className="text-[10px] tracking-wider uppercase text-[#C9A24B] font-semibold block">
                   FICHE VÉHICULE EN CONCESSION
                 </span>
-                <h3 className="font-display text-2xl text-[#F4F1EA] font-normal">
+                <h3 id="dossier-title" className="font-display text-2xl text-[#F4F1EA] font-normal">
                   {activeDossier.name}
                 </h3>
               </div>
               <button
                 onClick={() => setActiveDossier(null)}
-                className="text-neutral-400 hover:text-white p-1 text-lg font-mono"
+                aria-label="Fermer la fiche véhicule"
+                className="min-h-11 min-w-11 md:min-h-0 md:min-w-0 text-neutral-400 hover:text-white p-1 text-lg font-mono"
               >
                 ✕
               </button>
@@ -1112,13 +1116,13 @@ export default function AutoProDRCPage() {
                       handleWhatsAppInquiry(activeDossier.name);
                       setActiveDossier(null);
                     }}
-                    className="px-4 py-2 bg-[#C9A24B] hover:bg-[#EBD699] text-[#070707] font-semibold uppercase tracking-wider text-[11px]"
+                    className="min-h-11 md:min-h-0 px-4 py-2 bg-[#C9A24B] hover:bg-[#EBD699] text-[#070707] font-semibold uppercase tracking-wider text-[11px]"
                   >
                     Contacter sur WhatsApp
                   </button>
                   <button
                     onClick={() => setActiveDossier(null)}
-                    className="px-3 py-2 border border-white/20 hover:border-white text-white uppercase tracking-wider text-[11px]"
+                    className="min-h-11 md:min-h-0 px-3 py-2 border border-white/20 hover:border-white text-white uppercase tracking-wider text-[11px]"
                   >
                     Fermer
                   </button>

@@ -28,6 +28,11 @@
   }
 }
 
+/* Anchor links must clear the fixed header */
+section {
+  scroll-margin-top: 6rem;
+}
+
 /* Custom Typography Utilities */
 .font-display {
   font-family: var(--font-fraunces), 'Fraunces', Georgia, serif;
