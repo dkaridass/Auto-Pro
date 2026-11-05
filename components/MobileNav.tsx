@@ -3,10 +3,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 const LINKS = [
-  { href: '#inventory', label: 'Stock & Catalogue' },
+  { href: '#inventory', label: 'Collection' },
   { href: '#services', label: 'Services' },
-  { href: '#armoured', label: 'Véhicules Blindés' },
-  { href: '#contact', label: 'Showroom & Contact' },
+  { href: '#armoured', label: 'Blindés' },
+  { href: '#contact', label: 'Contact' },
 ];
 
 export default function MobileNav() {
