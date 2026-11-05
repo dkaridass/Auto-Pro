@@ -6,155 +6,29 @@ interface AutoProLogoProps {
   withText?: boolean;
 }
 
+/** Official Auto Pro DRC emblem: vector trace of the brand shield, with its banded gold sheen. */
 export const AutoProLogo: React.FC<AutoProLogoProps> = ({
   className = 'w-10 h-11',
   withText = false,
 }) => {
-  const uid = useId().replace(/:/g, '');
-  const goldId = `apLogoGoldLinear-${uid}`;
-  const rimId = `apLogoRimLight-${uid}`;
-  const bevelId = `apLogoBevel-${uid}`;
+  const gid = `apGold-${useId().replace(/:/g, '')}`;
   return (
-    <div className={`inline-flex items-center gap-3.5 ${withText ? '' : ''}`}>
-      {/* The Official Auto Pro DRC Shield Emblem */}
+    <div className="inline-flex items-center gap-3.5">
       <div className={`relative shrink-0 flex items-center justify-center ${className}`}>
         <svg
-          viewBox="0 0 500 500"
+          viewBox="44 33 137 155"
           className="w-full h-full drop-shadow-[0_2px_12px_rgba(201,162,75,0.3)] transition-transform duration-300 hover:scale-105"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          role="img"
+          aria-label="Auto Pro DRC"
         >
           <defs>
-            {/* Multi-stop luxury metallic gold linear gradient */}
-            <linearGradient id={goldId} x1="12%" y1="6%" x2="88%" y2="94%">
-              <stop offset="0%" stopColor="#FFF2BF" />
-              <stop offset="14%" stopColor="#F5D474" />
-              <stop offset="28%" stopColor="#E2BB53" />
-              <stop offset="46%" stopColor="#C49735" />
-              <stop offset="68%" stopColor="#8C651C" />
-              <stop offset="84%" stopColor="#E2BB53" />
-              <stop offset="94%" stopColor="#F9E298" />
-              <stop offset="100%" stopColor="#6E480F" />
-            </linearGradient>
-
-            {/* Specular rim highlight */}
-            <linearGradient id={rimId} x1="50%" y1="0%" x2="50%" y2="100%">
-              <stop offset="0%" stopColor="#FFFBEB" stopOpacity="0.95" />
-              <stop offset="30%" stopColor="#F0CE72" stopOpacity="0.7" />
-              <stop offset="70%" stopColor="#966F21" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#4A3107" stopOpacity="0.85" />
-            </linearGradient>
-
-            {/* Bevel stroke lighting */}
-            <linearGradient id={bevelId} x1="25%" y1="0%" x2="75%" y2="100%">
-              <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.8" />
-              <stop offset="45%" stopColor="#E0B74C" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#5E3D0A" stopOpacity="0.75" />
+            <linearGradient id={gid} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="225" y2="0">
+              <stop offset="0.000" stopColor="#734D12" /><stop offset="0.018" stopColor="#734D12" /><stop offset="0.036" stopColor="#734D12" /><stop offset="0.054" stopColor="#734D12" /><stop offset="0.071" stopColor="#734D12" /><stop offset="0.089" stopColor="#734D12" /><stop offset="0.107" stopColor="#734D12" /><stop offset="0.125" stopColor="#734D12" /><stop offset="0.143" stopColor="#734D12" /><stop offset="0.161" stopColor="#734D12" /><stop offset="0.179" stopColor="#734D12" /><stop offset="0.196" stopColor="#734D12" /><stop offset="0.214" stopColor="#785315" /><stop offset="0.232" stopColor="#805C1B" /><stop offset="0.250" stopColor="#83601D" /><stop offset="0.268" stopColor="#876520" /><stop offset="0.286" stopColor="#98752B" /><stop offset="0.304" stopColor="#B48F3D" /><stop offset="0.321" stopColor="#D0A94D" /><stop offset="0.339" stopColor="#E5C15F" /><stop offset="0.357" stopColor="#EFD689" /><stop offset="0.375" stopColor="#E9C86E" /><stop offset="0.393" stopColor="#E2BB54" /><stop offset="0.411" stopColor="#E8C86D" /><stop offset="0.429" stopColor="#F1D990" /><stop offset="0.446" stopColor="#F0D68A" /><stop offset="0.464" stopColor="#D9B250" /><stop offset="0.482" stopColor="#BC9642" /><stop offset="0.500" stopColor="#C39D47" /><stop offset="0.518" stopColor="#A17D30" /><stop offset="0.536" stopColor="#A88435" /><stop offset="0.554" stopColor="#B6903E" /><stop offset="0.571" stopColor="#D2AB4E" /><stop offset="0.589" stopColor="#EACC75" /><stop offset="0.607" stopColor="#F3DC95" /><stop offset="0.625" stopColor="#F1D88E" /><stop offset="0.643" stopColor="#EBCE79" /><stop offset="0.661" stopColor="#EBCD78" /><stop offset="0.679" stopColor="#EDD17F" /><stop offset="0.696" stopColor="#E8C66A" /><stop offset="0.714" stopColor="#D0A94D" /><stop offset="0.732" stopColor="#A88335" /><stop offset="0.750" stopColor="#947228" /><stop offset="0.768" stopColor="#86631F" /><stop offset="0.786" stopColor="#744F13" /><stop offset="0.804" stopColor="#6E480F" /><stop offset="0.821" stopColor="#6E480F" /><stop offset="0.839" stopColor="#6E480F" /><stop offset="0.857" stopColor="#6E480F" /><stop offset="0.875" stopColor="#6E480F" /><stop offset="0.893" stopColor="#6E480F" /><stop offset="0.911" stopColor="#6E480F" /><stop offset="0.929" stopColor="#6E480F" /><stop offset="0.946" stopColor="#6E480F" /><stop offset="0.964" stopColor="#6E480F" /><stop offset="0.982" stopColor="#6E480F" /><stop offset="1.000" stopColor="#6E480F" />
             </linearGradient>
           </defs>
-
-          {/* 1. OUTER SHIELD CREST RIM */}
-          <path
-            fill={`url(#${goldId})`}
-            fillRule="evenodd"
-            d="
-              M 250,68 
-              C 334,71 394,104 398,160 
-              C 403,248 348,348 250,442 
-              C 152,348 97,248 102,160 
-              C 106,104 166,71 250,68 
-              Z
-              M 250,98 
-              C 180,101 130,129 126,176 
-              C 123,246 170,332 250,412 
-              C 330,332 377,246 374,176 
-              C 370,129 320,101 250,98 
-              Z
-            "
-          />
-
-          {/* Outer Rim Highlight Stroke */}
-          <path
-            d="
-              M 250,70 
-              C 333,73 392,105 396,160 
-              C 401,247 347,346 250,440 
-              C 153,346 99,247 104,160 
-              C 108,105 167,73 250,70
-            "
-            stroke={`url(#${rimId})`}
-            strokeWidth="1.8"
-            strokeLinecap="round"
-          />
-
-          {/* Inner Rim Accent Stroke */}
-          <path
-            d="
-              M 250,99 
-              C 181,102 131,130 128,176 
-              C 125,245 171,330 250,410 
-              C 329,330 375,245 372,176 
-              C 369,130 319,102 250,99
-            "
-            stroke={`url(#${bevelId})`}
-            strokeWidth="1.2"
-          />
-
-          {/* 2. CENTRAL MONOGRAM: INTERLOCKING 'A' AND 'P' */}
-          {/* LETTER 'A' (LEFT) */}
-          <path
-            fill={`url(#${goldId})`}
-            fillRule="evenodd"
-            d="
-              M 242.5,114 
-              L 242.5,384 
-              L 214,375 
-              L 214,266 
-              L 186,266 
-              L 168,336 
-              C 162,324 156,310 151,294 
-              L 174,238 
-              L 214,238 
-              L 214,152 
-              C 192,160 170,175 152,198 
-              C 147,188 145,178 145,170 
-              C 166,142 201,122 242.5,114 
-              Z
-              M 214,180 
-              L 214,212 
-              L 183,212 
-              C 193,198 203,189 214,180 
-              Z
-            "
-          />
-
-          {/* LETTER 'P' (RIGHT) */}
-          <path
-            fill={`url(#${goldId})`}
-            fillRule="evenodd"
-            d="
-              M 257.5,114 
-              C 299,122 334,142 355,170 
-              C 355,178 353,188 348,198 
-              C 330,175 308,160 286,152 
-              L 286,238 
-              L 318,238 
-              C 328,238 338,232 344,222 
-              C 350,212 352,198 352,185 
-              C 352,175 350,165 346,156 
-              C 352,168 355,182 355,195 
-              C 355,218 342,246 322,258 
-              C 310,265 298,266 286,266 
-              L 286,375 
-              L 257.5,384 
-              Z
-              M 286,176 
-              C 298,176 312,184 318,195 
-              C 324,206 324,218 316,226 
-              C 310,232 300,234 286,234 
-              Z
-            "
-          />
+          <path fill={`url(#${gid})`} fillRule="evenodd" d="M111.00,185.07C110.11,184.83 108.97,184.28 106.81,183.08C105.71,182.47 104.31,181.69 103.69,181.35C101.50,180.14 95.26,175.84 91.50,172.94C85.16,168.07 75.48,158.17 71.01,152.00C70.64,151.48 69.81,150.36 69.18,149.50C58.59,135.08 50.32,114.72 48.37,98.24C48.23,97.04 48.06,95.72 48.00,95.31C45.74,80.76 47.97,71.70 56.30,61.55C65.19,50.71 82.18,41.68 99.56,38.55C100.52,38.38 101.90,38.12 102.62,37.99C103.35,37.85 104.98,37.66 106.25,37.56C107.52,37.45 109.08,37.32 109.71,37.25C112.79,36.92 118.29,37.35 123.38,38.32C124.65,38.57 126.42,38.91 127.31,39.08C153.23,44.01 172.61,58.64 176.81,76.44C177.41,78.98 178.00,85.25 177.83,87.38C177.36,93.22 177.19,94.92 176.75,97.94C176.21,101.72 175.73,104.37 175.06,107.31C174.83,108.34 174.49,109.89 174.30,110.75C174.11,111.61 173.69,113.18 173.36,114.25C173.02,115.32 172.52,116.95 172.24,117.88C171.70,119.69 171.41,120.50 169.96,124.25C167.35,131.02 163.84,138.06 160.44,143.37C157.54,147.89 157.12,148.51 155.17,151.12C150.68,157.13 148.23,159.89 142.43,165.42C136.90,170.69 130.03,175.86 121.79,180.92C115.17,184.98 113.30,185.71 111.00,185.07ZM114.04,175.00C114.41,174.86 115.19,174.46 115.77,174.10C116.34,173.75 117.63,172.99 118.62,172.40C127.15,167.41 138.25,157.84 144.41,150.17C145.34,149.01 146.62,147.41 147.27,146.61C154.39,137.75 161.89,124.06 164.82,114.53C165.07,113.72 165.54,112.22 165.88,111.19C166.67,108.72 167.80,104.42 168.18,102.41C168.35,101.53 168.63,100.14 168.80,99.31C168.97,98.49 169.18,97.22 169.25,96.50C169.33,95.78 169.53,94.29 169.69,93.19C171.43,81.56 169.83,75.30 163.06,67.19C155.56,58.20 137.93,49.50 122.69,47.25C122.21,47.18 121.08,46.98 120.19,46.82C117.04,46.23 114.11,46.12 110.00,46.44C107.30,46.64 107.24,46.65 104.94,47.06C104.04,47.22 102.95,47.39 102.50,47.44C94.27,48.30 81.00,52.87 73.58,57.40C62.72,64.04 56.63,71.85 54.85,81.44C54.61,82.71 54.65,88.11 54.91,90.19C55.96,98.53 56.43,101.24 57.68,106.25C58.41,109.13 60.30,115.34 60.88,116.75C61.01,117.06 61.45,118.16 61.85,119.19C64.50,125.93 68.41,133.41 72.59,139.75C78.88,149.30 88.79,159.93 96.31,165.18C96.79,165.52 97.81,166.24 98.56,166.80C101.58,169.00 109.02,173.92 110.51,174.69C111.67,175.30 112.95,175.41 114.04,175.00ZM108.56,170.38C107.43,169.98 104.53,168.39 101.75,166.65C98.85,164.83 98.18,164.16 97.54,162.44C97.32,161.84 97.31,160.76 97.25,139.00C97.18,113.84 97.25,115.74 96.42,114.99C95.63,114.26 93.01,114.12 84.69,114.35C77.86,114.54 77.92,114.39 81.66,121.75C83.46,125.29 84.23,126.69 85.67,129.06C87.89,132.70 87.79,132.12 87.84,142.04C87.90,152.04 87.86,152.25 86.26,152.25C82.96,152.25 71.33,135.03 66.53,123.06C64.92,119.06 62.31,111.32 61.57,108.38C61.02,106.22 60.38,103.21 60.19,101.93C60.09,101.24 59.93,100.29 59.83,99.81C59.39,97.74 59.00,94.88 58.49,89.94C58.05,85.67 58.38,80.74 59.27,78.13C61.69,71.10 65.71,66.16 74.00,60.01C76.71,58.00 81.21,55.59 84.62,54.31C93.97,50.82 100.94,49.19 106.56,49.20C109.52,49.20 110.22,49.46 110.71,50.72C111.08,51.67 111.06,169.06 110.70,169.80C110.30,170.59 109.65,170.77 108.56,170.38ZM115.03,170.30C114.87,170.20 114.65,169.93 114.53,169.71C114.28,169.24 114.12,52.64 114.37,51.27C114.72,49.41 116.48,48.95 121.02,49.56C121.80,49.67 123.11,49.84 123.94,49.95C132.99,51.09 138.14,52.76 146.66,57.29C160.26,64.53 166.86,73.60 166.87,85.06C166.87,88.59 166.06,97.04 165.37,100.69C165.24,101.37 165.05,102.49 164.93,103.17C164.28,107.08 162.87,112.04 162.18,112.85C160.93,114.31 161.36,114.27 144.30,114.31C128.41,114.34 129.05,114.31 128.39,115.06C127.68,115.88 127.70,115.00 127.69,139.31C127.69,161.69 127.69,161.69 127.40,162.38C126.67,164.11 125.51,165.05 119.82,168.55C116.70,170.48 115.76,170.82 115.03,170.30ZM94.51,99.76C95.93,99.64 96.47,99.37 96.88,98.56C97.24,97.83 97.39,68.12 97.03,67.11C96.58,65.84 95.69,65.76 92.81,66.72C84.41,69.51 74.73,76.46 72.50,81.29C71.42,83.62 71.55,89.45 72.82,95.93C73.54,99.61 73.84,99.81 78.43,99.73C80.08,99.70 82.34,99.71 83.44,99.75C86.39,99.86 93.28,99.87 94.51,99.76ZM138.50,99.75C149.51,99.93 150.17,99.88 151.05,98.86C151.74,98.05 152.33,95.14 152.69,90.81C152.80,89.51 152.94,87.96 153.00,87.38C153.49,83.03 152.60,80.62 149.05,76.78C146.04,73.52 143.23,71.64 137.31,68.93C130.23,65.69 128.76,65.36 128.00,66.82C127.76,67.28 127.65,97.40 127.88,98.26C128.25,99.63 129.02,99.89 132.31,99.78C133.69,99.73 136.47,99.72 138.50,99.75Z" />
         </svg>
       </div>
 
