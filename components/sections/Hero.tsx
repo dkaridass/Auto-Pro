@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState, useSyncExternalStore } from 'react';
+import React, { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import VantaBackground from '@/components/VantaBackground';
 import Magnet from '@/components/Magnet';
 import LubumbashiClock from '@/components/LubumbashiClock';
@@ -14,6 +14,36 @@ const HIGHLIGHTS = [
   { t: 'Dédouanement clé en main', d: 'Formalités DGDA, quitus fiscal et immatriculation inclus.' },
   { t: 'Division Blindée', d: 'Véhicules certifiés CEN B6 / VR7 pour axes et sites miniers.' },
 ];
+
+type Paint = { rgb: [number, number, number]; metal: number; rough: number };
+const GOLD: [number, number, number] = [0.584, 0.361, 0.07]; // #C9A24B in linear space
+const PAINT: Record<string, Paint> = {
+  Body_Color: { rgb: [0.012, 0.012, 0.014], metal: 0.95, rough: 0.16 }, // gloss black
+  Ferrari_Yellow: { rgb: GOLD, metal: 1, rough: 0.28 },
+  metal_chrome: { rgb: GOLD, metal: 1, rough: 0.22 },
+  metal_gray: { rgb: [0.42, 0.26, 0.05], metal: 1, rough: 0.35 },
+  _0098_DodgerBlue: { rgb: GOLD, metal: 1, rough: 0.3 },
+  Turn_Signal_LED: { rgb: GOLD, metal: 0.4, rough: 0.4 },
+  Taillight_Glass: { rgb: [0.35, 0.16, 0.02], metal: 0.2, rough: 0.2 },
+  Leather_red: { rgb: [0.03, 0.02, 0.015], metal: 0.1, rough: 0.6 },
+  Glass_Gray: { rgb: [0.015, 0.015, 0.02], metal: 0.6, rough: 0.05 }, // smoked glass
+  Projector_Glass: { rgb: [0.05, 0.045, 0.035], metal: 0.5, rough: 0.05 },
+  Interior_light: { rgb: [0.07, 0.05, 0.03], metal: 0.1, rough: 0.6 },
+  Carpet: { rgb: [0.03, 0.025, 0.02], metal: 0, rough: 0.9 },
+  Carbon_Fiber: { rgb: [0.05, 0.05, 0.055], metal: 0.6, rough: 0.3 },
+};
+
+/** Repaint the showroom model in the brand palette: black body, gold wheels and details. */
+function applyBrandPaint(el: HTMLElement & { model?: { materials: { name: string; pbrMetallicRoughness: { setBaseColorFactor: (c: number[]) => void; setMetallicFactor: (v: number) => void; setRoughnessFactor: (v: number) => void; baseColorFactor: number[] } }[] } }) {
+  el.model?.materials.forEach((m) => {
+    const p = PAINT[m.name];
+    if (!p) return;
+    const alpha = m.pbrMetallicRoughness.baseColorFactor[3] ?? 1;
+    m.pbrMetallicRoughness.setBaseColorFactor([...p.rgb, alpha]);
+    m.pbrMetallicRoughness.setMetallicFactor(p.metal);
+    m.pbrMetallicRoughness.setRoughnessFactor(p.rough);
+  });
+}
 
 const ORBITS = [
   { label: '3/4 Face', orbit: '45deg 75deg 105%', key: '45deg' },
@@ -40,6 +70,15 @@ export default function Hero() {
   const [cameraOrbit, setCameraOrbit] = useState('45deg 75deg 105%');
   const [isAutoRotate, setIsAutoRotate] = useState(true);
   const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
+
+  useEffect(() => {
+    const el = mv.current as (HTMLElement & Parameters<typeof applyBrandPaint>[0] & { loaded?: boolean }) | null;
+    if (!el) return;
+    const paint = () => applyBrandPaint(el);
+    if (el.loaded) paint();
+    el.addEventListener('load', paint);
+    return () => el.removeEventListener('load', paint);
+  }, [mounted]);
 
   const setCamera = (orbit: string) => {
     setCameraOrbit(orbit);
@@ -139,7 +178,8 @@ export default function Hero() {
                   touch-action="pan-y"
                   camera-orbit={cameraOrbit}
                   field-of-view="32deg"
-                  exposure="1.1"
+                  environment-image="neutral"
+                  exposure="1.25"
                   shadow-intensity="1.8"
                   shadow-softness="0.75"
                   interaction-prompt="none"
