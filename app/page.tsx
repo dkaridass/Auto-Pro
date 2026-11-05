@@ -5,6 +5,13 @@ import Image from 'next/image';
 import { AutoProLogo } from '@/components/AutoProLogo';
 import LubumbashiClock from '@/components/LubumbashiClock';
 import MobileNav from '@/components/MobileNav';
+import SmoothScroll from '@/components/SmoothScroll';
+import ScrollProgress from '@/components/ScrollProgress';
+import VantaBackground from '@/components/VantaBackground';
+import SplitHeading from '@/components/SplitHeading';
+import Reveal from '@/components/Reveal';
+import SpotlightCard from '@/components/SpotlightCard';
+import Magnet from '@/components/Magnet';
 
 const emptySubscribe = () => () => {};
 
@@ -253,7 +260,9 @@ export default function AutoProDRCPage() {
 
   return (
     <div className="relative bg-[#070707] text-[#F4F1EA] selection:bg-[#C9A24B] selection:text-black min-h-screen font-sans-editorial overflow-x-hidden">
-      
+      <SmoothScroll />
+      <ScrollProgress />
+
       {/* Background Subtle Watermark Logo */}
       <div 
         aria-hidden="true" 
@@ -290,14 +299,14 @@ export default function AutoProDRCPage() {
               <span className="font-display text-sm sm:text-lg tracking-[0.16em] sm:tracking-[0.25em] whitespace-nowrap font-semibold text-[#F4F1EA] uppercase">
                 AUTO PRO <span className="text-[#C9A24B]">DRC</span>
               </span>
-              <span className="hidden sm:block text-[10px] uppercase tracking-[0.2em] text-[#A8A398]">
+              <span className="hidden sm:block xl:whitespace-nowrap text-[10px] uppercase tracking-[0.2em] text-[#A8A398]">
                 Concessionnaire Automobile • Lubumbashi
               </span>
             </div>
           </a>
 
           {/* Nav Links */}
-          <nav className="hidden md:flex items-center space-x-8 text-xs tracking-[0.2em] uppercase text-[#C4C0B5] font-medium">
+          <nav className="hidden md:flex items-center space-x-8 xl:space-x-6 xl:px-6 xl:whitespace-nowrap text-xs tracking-[0.2em] uppercase text-[#C4C0B5] font-medium">
             <a href="#inventory" className="hover:text-[#C9A24B] transition-colors">
               Stock & Catalogue
             </a>
@@ -332,6 +341,7 @@ export default function AutoProDRCPage() {
       {/* HERO SECTION                                              */}
       {/* ========================================================= */}
       <section id="hero" className="relative pt-28 pb-14 md:pt-36 md:pb-16 flex flex-col justify-between border-b border-[#C9A24B]/15 overflow-hidden">
+        <VantaBackground className="absolute inset-0 z-0 opacity-50 [mask-image:linear-gradient(to_left,black_5%,transparent_80%)]" />
         <div 
           aria-hidden="true" 
           className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-l from-[#C9A24B]/10 via-[#C9A24B]/5 to-transparent blur-3xl pointer-events-none rounded-full"
@@ -348,11 +358,11 @@ export default function AutoProDRCPage() {
                 <span>LUBUMBASHI • HAUT-KATANGA</span>
               </div>
 
-              <h1 className="font-display text-4xl sm:text-5xl xl:text-6xl font-light tracking-tight text-[#F4F1EA] leading-[1.1]">
+              <SplitHeading className="font-display text-4xl sm:text-5xl xl:text-6xl font-light tracking-tight text-[#F4F1EA] leading-[1.1]">
                 VOTRE CONCESSION <br />
                 <span className="font-normal italic text-[#EBD699]">AUTOMOBILE</span> <br />
                 À LUBUMBASHI.
-              </h1>
+              </SplitHeading>
 
               <p className="text-sm sm:text-base text-[#C5BFB3] leading-relaxed max-w-lg font-light">
                 Véhicules neufs et récents en stock ou sur commande : 4x4 tout-terrain, super-pickups, 
@@ -361,18 +371,22 @@ export default function AutoProDRCPage() {
 
               {/* Action Buttons */}
               <div className="pt-2 flex flex-wrap items-center gap-3">
+                <Magnet>
                 <a
                   href="#inventory"
                   className="inline-flex items-center justify-center min-h-11 md:min-h-0 px-6 py-3 text-xs tracking-[0.22em] uppercase bg-[#C9A24B] hover:bg-[#EBD699] text-[#070707] font-semibold transition-all shadow-[0_0_20px_rgba(201,162,75,0.2)]"
                 >
                   Voir le Stock Disponible
                 </a>
+                </Magnet>
+                <Magnet>
                 <a
                   href="#contact"
                   className="inline-flex items-center justify-center min-h-11 md:min-h-0 px-6 py-3 text-xs tracking-[0.22em] uppercase border border-[#C9A24B]/40 hover:border-[#C9A24B] text-[#F4F1EA] hover:text-[#C9A24B] transition-colors"
                 >
                   Contacter le Showroom
                 </a>
+                </Magnet>
               </div>
 
             </div>
@@ -605,10 +619,8 @@ export default function AutoProDRCPage() {
           {/* Vehicle Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8">
             {filteredVehicles.map((car) => (
-              <div
-                key={car.id}
-                className={`${car.colSpan} group flex flex-col luxury-slate-card border border-[#C9A24B]/20 hover:border-[#C9A24B]/60 transition-all duration-300 overflow-hidden relative`}
-              >
+              <Reveal key={car.id} className={`${car.colSpan} flex`}>
+              <SpotlightCard className="group w-full flex flex-col luxury-slate-card border border-[#C9A24B]/20 hover:border-[#C9A24B]/60 transition-all duration-300 overflow-hidden">
                 {/* Photo */}
                 <div className="relative aspect-[16/10] w-full overflow-hidden bg-black editorial-img-wrap">
                   <Image
@@ -680,7 +692,8 @@ export default function AutoProDRCPage() {
                   </div>
 
                 </div>
-              </div>
+              </SpotlightCard>
+              </Reveal>
             ))}
           </div>
 
@@ -706,7 +719,7 @@ export default function AutoProDRCPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             
             {/* Service 1 */}
-            <div className="p-6 border border-white/[0.08] bg-[#0e0e0e] hover:border-[#C9A24B]/50 transition-colors">
+            <Reveal delay={0.0}><SpotlightCard className="h-full p-6 border border-white/[0.08] bg-[#0e0e0e] hover:border-[#C9A24B]/50 transition-colors">
               <div className="w-8 h-8 rounded-full bg-[#C9A24B]/10 border border-[#C9A24B]/30 flex items-center justify-center text-[#C9A24B] font-mono text-xs mb-4">
                 01
               </div>
@@ -716,10 +729,10 @@ export default function AutoProDRCPage() {
               <p className="text-xs text-[#A8A398] leading-relaxed">
                 Stock permanent des meilleurs 4x4 et berlines. Traçabilité des véhicules et contrôles mécaniques complets.
               </p>
-            </div>
+            </SpotlightCard></Reveal>
 
             {/* Service 2 */}
-            <div className="p-6 border border-white/[0.08] bg-[#0e0e0e] hover:border-[#C9A24B]/50 transition-colors">
+            <Reveal delay={0.1}><SpotlightCard className="h-full p-6 border border-white/[0.08] bg-[#0e0e0e] hover:border-[#C9A24B]/50 transition-colors">
               <div className="w-8 h-8 rounded-full bg-[#C9A24B]/10 border border-[#C9A24B]/30 flex items-center justify-center text-[#C9A24B] font-mono text-xs mb-4">
                 02
               </div>
@@ -729,10 +742,10 @@ export default function AutoProDRCPage() {
               <p className="text-xs text-[#A8A398] leading-relaxed">
                 Recherche personnalisée depuis le Japon, les USA ou l&apos;Afrique du Sud avec logistique maritime et terrestre sécurisée.
               </p>
-            </div>
+            </SpotlightCard></Reveal>
 
             {/* Service 3 */}
-            <div className="p-6 border border-white/[0.08] bg-[#0e0e0e] hover:border-[#C9A24B]/50 transition-colors">
+            <Reveal delay={0.2}><SpotlightCard className="h-full p-6 border border-white/[0.08] bg-[#0e0e0e] hover:border-[#C9A24B]/50 transition-colors">
               <div className="w-8 h-8 rounded-full bg-[#C9A24B]/10 border border-[#C9A24B]/30 flex items-center justify-center text-[#C9A24B] font-mono text-xs mb-4">
                 03
               </div>
@@ -742,10 +755,10 @@ export default function AutoProDRCPage() {
               <p className="text-xs text-[#A8A398] leading-relaxed">
                 Prise en charge intégrale des formalités de douane, droits fiscaux DGI et obtention des plaques d&apos;immatriculation du Katanga.
               </p>
-            </div>
+            </SpotlightCard></Reveal>
 
             {/* Service 4 */}
-            <div className="p-6 border border-white/[0.08] bg-[#0e0e0e] hover:border-[#C9A24B]/50 transition-colors">
+            <Reveal delay={0.3}><SpotlightCard className="h-full p-6 border border-white/[0.08] bg-[#0e0e0e] hover:border-[#C9A24B]/50 transition-colors">
               <div className="w-8 h-8 rounded-full bg-[#C9A24B]/10 border border-[#C9A24B]/30 flex items-center justify-center text-[#C9A24B] font-mono text-xs mb-4">
                 04
               </div>
@@ -755,7 +768,7 @@ export default function AutoProDRCPage() {
               <p className="text-xs text-[#A8A398] leading-relaxed">
                 Service après-vente, diagnostic électronique multimarque et approvisionnement rapide en pièces d&apos;origine constructeur.
               </p>
-            </div>
+            </SpotlightCard></Reveal>
 
           </div>
 
@@ -768,7 +781,7 @@ export default function AutoProDRCPage() {
       <section id="armoured" className="py-16 md:py-24 relative">
         <div className="max-w-7xl mx-auto px-5 sm:px-8">
           
-          <div className="border border-[#C9A24B]/30 bg-[#0c0c0c] p-6 sm:p-10 relative">
+          <Reveal className="border border-[#C9A24B]/30 bg-[#0c0c0c] p-6 sm:p-10 relative">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               
               <div className="lg:col-span-8 space-y-4">
@@ -817,7 +830,7 @@ export default function AutoProDRCPage() {
               </div>
 
             </div>
-          </div>
+          </Reveal>
 
         </div>
       </section>
@@ -1036,6 +1049,7 @@ export default function AutoProDRCPage() {
       {/* ========================================================= */}
       {activeDossier && (
         <div
+          data-lenis-prevent
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm"
           onClick={(e) => {
             if (e.target === e.currentTarget) setActiveDossier(null);

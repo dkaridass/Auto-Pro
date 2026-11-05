@@ -59,6 +59,7 @@ export default function MobileNav() {
           role="dialog"
           aria-modal="true"
           aria-label="Menu de navigation"
+          data-lenis-prevent
           className="fixed inset-0 z-[60] bg-[#070707] flex flex-col px-5 sm:px-8 py-5"
         >
           <div className="flex justify-end">

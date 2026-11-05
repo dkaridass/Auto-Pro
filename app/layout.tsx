@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
-    <html lang="fr" className={`dark scroll-smooth ${fraunces.variable} ${plusJakartaSans.variable}`} suppressHydrationWarning>
+    <html lang="fr" className={`dark ${fraunces.variable} ${plusJakartaSans.variable}`} suppressHydrationWarning>
       <head>
         <Script
           type="module"
