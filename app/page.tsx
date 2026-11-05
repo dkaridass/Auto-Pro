@@ -12,6 +12,10 @@ import SplitHeading from '@/components/SplitHeading';
 import Reveal from '@/components/Reveal';
 import SpotlightCard from '@/components/SpotlightCard';
 import Magnet from '@/components/Magnet';
+import Preloader from '@/components/Preloader';
+import Marquee from '@/components/Marquee';
+import TiltCard from '@/components/TiltCard';
+import CursorRing from '@/components/CursorRing';
 
 const emptySubscribe = () => () => {};
 
@@ -260,6 +264,8 @@ export default function AutoProDRCPage() {
 
   return (
     <div className="relative bg-[#070707] text-[#F4F1EA] selection:bg-[#C9A24B] selection:text-black min-h-screen font-sans-editorial overflow-x-hidden">
+      <Preloader />
+      <CursorRing />
       <SmoothScroll />
       <ScrollProgress />
 
@@ -341,7 +347,7 @@ export default function AutoProDRCPage() {
       {/* HERO SECTION                                              */}
       {/* ========================================================= */}
       <section id="hero" className="relative pt-28 pb-14 md:pt-36 md:pb-16 flex flex-col justify-between border-b border-[#C9A24B]/15 overflow-hidden">
-        <VantaBackground className="absolute inset-0 z-0 opacity-50 [mask-image:linear-gradient(to_left,black_5%,transparent_80%)]" />
+        <VantaBackground className="absolute inset-0 z-0 opacity-70 [mask-image:linear-gradient(to_bottom,black_65%,transparent)]" />
         <div 
           aria-hidden="true" 
           className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-l from-[#C9A24B]/10 via-[#C9A24B]/5 to-transparent blur-3xl pointer-events-none rounded-full"
@@ -358,9 +364,9 @@ export default function AutoProDRCPage() {
                 <span>LUBUMBASHI • HAUT-KATANGA</span>
               </div>
 
-              <SplitHeading className="font-display text-4xl sm:text-5xl xl:text-6xl font-light tracking-tight text-[#F4F1EA] leading-[1.1]">
+              <SplitHeading delay={2.1} className="font-display text-4xl sm:text-5xl xl:text-6xl font-light tracking-tight text-[#F4F1EA] leading-[1.1]">
                 VOTRE CONCESSION <br />
-                <span className="font-normal italic text-[#EBD699]">AUTOMOBILE</span> <br />
+                <span className="font-normal italic shiny-text">AUTOMOBILE</span> <br />
                 À LUBUMBASHI.
               </SplitHeading>
 
@@ -543,6 +549,8 @@ export default function AutoProDRCPage() {
         </div>
       </div>
 
+      <Marquee items={['Toyota', 'Lexus', 'Mercedes-Benz', 'Range Rover', 'RAM', 'Maybach']} />
+
       {/* ========================================================= */}
       {/* INVENTORY & STOCK                                         */}
       {/* ========================================================= */}
@@ -556,9 +564,9 @@ export default function AutoProDRCPage() {
                 <span className="w-2 h-[1.5px] bg-[#C9A24B]"></span>
                 <span>STOCK & DISPONIBILITÉS</span>
               </div>
-              <h2 className="font-display text-3xl sm:text-4xl font-light text-[#F4F1EA]">
+              <SplitHeading as="h2" onScroll className="font-display text-3xl sm:text-4xl font-light text-[#F4F1EA]">
                 VÉHICULES EN CONCESSION.
-              </h2>
+              </SplitHeading>
             </div>
 
             {/* Filter Buttons */}
@@ -620,7 +628,7 @@ export default function AutoProDRCPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8">
             {filteredVehicles.map((car) => (
               <Reveal key={car.id} className={`${car.colSpan} flex`}>
-              <SpotlightCard className="group w-full flex flex-col luxury-slate-card border border-[#C9A24B]/20 hover:border-[#C9A24B]/60 transition-all duration-300 overflow-hidden">
+              <TiltCard className="w-full flex"><SpotlightCard className="group w-full flex flex-col luxury-slate-card border border-[#C9A24B]/20 hover:border-[#C9A24B]/60 transition-all duration-300 overflow-hidden">
                 {/* Photo */}
                 <div className="relative aspect-[16/10] w-full overflow-hidden bg-black editorial-img-wrap">
                   <Image
@@ -692,7 +700,7 @@ export default function AutoProDRCPage() {
                   </div>
 
                 </div>
-              </SpotlightCard>
+              </SpotlightCard></TiltCard>
               </Reveal>
             ))}
           </div>
@@ -711,9 +719,9 @@ export default function AutoProDRCPage() {
               <span className="w-2 h-[1.5px] bg-[#C9A24B]"></span>
               <span>NOS SERVICES EN CONCESSION</span>
             </div>
-            <h2 className="font-display text-3xl sm:text-4xl font-light text-[#F4F1EA]">
+            <SplitHeading as="h2" onScroll className="font-display text-3xl sm:text-4xl font-light text-[#F4F1EA]">
               SOLUTIONS AUTOMOBILES COMPLÈTES.
-            </h2>
+            </SplitHeading>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

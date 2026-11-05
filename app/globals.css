@@ -121,3 +121,21 @@ a:focus-visible, button:focus-visible, select:focus-visible, textarea:focus-visi
   background: #C9A24B;
 }
 
+
+/* Shimmering gold text (React Bits "ShinyText" idea) */
+.shiny-text {
+  background: linear-gradient(110deg, #B8902F 35%, #FFF6D6 50%, #B8902F 65%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shiny 3.2s linear infinite;
+}
+@keyframes shiny {
+  0% { background-position: 120% 0; }
+  100% { background-position: -120% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shiny-text { animation: none; background-position: 50% 0; }
+}
