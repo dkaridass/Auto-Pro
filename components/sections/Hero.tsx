@@ -66,9 +66,9 @@ export default function Hero() {
           .timeline({
             scrollTrigger: { trigger: root.current, start: 'top top', end: '+=170%', scrub: 1, pin: true, anticipatePin: 1 },
           })
-          .to('.h-l1', { xPercent: -7, ease: 'none' }, 0)
-          .to('.h-l2', { xPercent: 5, ease: 'none' }, 0)
-          .to('.h-l3', { xPercent: 7, ease: 'none' }, 0)
+          .to('.h-l1', { xPercent: 4, ease: 'none' }, 0)
+          .to('.h-l2', { xPercent: -3, ease: 'none' }, 0)
+          .to('.h-l3', { xPercent: -5, ease: 'none' }, 0)
           .to('.h-car', { scale: 1.22, yPercent: -4, ease: 'none' }, 0)
           .to(
             orbit,
@@ -92,7 +92,7 @@ export default function Hero() {
   return (
     <>
       <section id="hero" ref={root} className="relative h-[100svh] min-h-[640px] overflow-hidden border-b border-[#C9A24B]/15">
-        <VantaBackground className="absolute inset-0 z-0 opacity-60 [mask-image:linear-gradient(to_bottom,black_55%,transparent)]" />
+        <VantaBackground className="absolute inset-0 z-0 opacity-45 [mask-image:linear-gradient(to_bottom,black_55%,transparent)]" />
         <div
           aria-hidden="true"
           className="absolute left-1/2 bottom-[-20%] -translate-x-1/2 w-[90vw] h-[60vh] bg-[radial-gradient(ellipse_at_center,rgba(201,162,75,0.22),transparent_65%)] pointer-events-none"
@@ -111,19 +111,19 @@ export default function Hero() {
           </div>
 
           <h1 className="mt-5 font-display uppercase font-light leading-[0.9] tracking-[-0.03em] text-[clamp(2.9rem,9.6vw,11rem)]">
-            <span className="h-l1 relative z-20 block overflow-hidden py-[0.04em]">
+            <span className="h-l1 [filter:drop-shadow(0_0_16px_rgba(7,7,7,0.95))] relative z-0 block overflow-hidden py-[0.04em]">
               <span className="h-line-inner block">L&apos;automobile</span>
             </span>
-            <span className="h-l2 relative z-0 block overflow-hidden py-[0.04em] pl-[7vw]">
+            <span className="h-l2 [filter:drop-shadow(0_0_16px_rgba(7,7,7,0.95))] relative z-0 block overflow-hidden py-[0.04em] pl-[7vw]">
               <span className="h-line-inner block italic font-normal shiny-text">d&apos;exception</span>
             </span>
-            <span className="h-l3 relative z-20 block overflow-hidden py-[0.04em] text-right">
+            <span className="h-l3 [filter:drop-shadow(0_0_16px_rgba(7,7,7,0.95))] relative z-0 block overflow-hidden py-[0.04em] text-right">
               <span className="h-line-inner block">au Katanga.</span>
             </span>
           </h1>
 
           {/* The car sits between the type: behind the front lines, in front of the middle one */}
-          <div className="h-car-intro absolute inset-x-0 bottom-0 top-[26%] z-10">
+          <div className="h-car-intro absolute inset-x-0 bottom-0 top-[36%] z-10">
             <div className="h-car w-full h-full">
               {mounted ? (
                 <model-viewer
@@ -179,7 +179,7 @@ export default function Hero() {
           </div>
 
           {/* Camera */}
-          <div className="h-fade absolute z-30 right-5 sm:right-8 bottom-[8.5rem] sm:bottom-[5.5rem] md:bottom-8 flex items-center gap-1 px-2 py-1 bg-[#070707]/80 border border-[#C9A24B]/30 backdrop-blur-md text-[10px] tracking-[0.18em] uppercase">
+          <div className="h-fade absolute z-30 right-5 sm:right-8 bottom-[8.5rem] sm:bottom-[5.5rem] md:bottom-[9.5rem] flex items-center gap-1 px-2 py-1 bg-[#070707]/80 border border-[#C9A24B]/30 backdrop-blur-md text-[10px] tracking-[0.18em] uppercase">
             {ORBITS.map((o) => (
               <button
                 key={o.key}
