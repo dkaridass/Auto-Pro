@@ -67,30 +67,30 @@ export default function AutoProDRCPage() {
         <div className="max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between">
           
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 sm:gap-3 group focus:outline-none min-w-0" aria-label="Auto Pro DRC Accueil">
+          <a href="#" className="flex items-center gap-2 sm:gap-3 group focus:outline-none min-w-0 min-h-11" aria-label="Auto Pro DRC Accueil">
             <AutoProLogo className="w-10 h-10 transition-transform duration-300 group-hover:scale-105" />
             <div className="flex flex-col min-w-0">
               <span className="font-display text-sm sm:text-lg tracking-[0.16em] sm:tracking-[0.25em] whitespace-nowrap font-semibold text-[#F4F1EA] uppercase">
                 AUTO PRO <span className="text-[#C9A24B]">DRC</span>
               </span>
-              <span className="hidden sm:block xl:whitespace-nowrap text-[10px] uppercase tracking-[0.2em] text-[#A8A398]">
+              <span className="hidden xl:block xl:whitespace-nowrap text-[10px] uppercase tracking-[0.2em] text-[#A8A398]">
                 Concessionnaire Automobile • Lubumbashi
               </span>
             </div>
           </a>
 
           {/* Nav Links */}
-          <nav className="hidden md:flex items-center space-x-8 xl:space-x-6 xl:px-6 xl:whitespace-nowrap text-xs tracking-[0.2em] uppercase text-[#C4C0B5] font-medium">
-            <a href="#inventory" className="hover:text-[#C9A24B] transition-colors">
+          <nav className="hidden lg:flex items-center space-x-8 xl:space-x-6 xl:px-6 xl:whitespace-nowrap text-xs tracking-[0.2em] uppercase text-[#C4C0B5] font-medium">
+            <a href="#inventory" className="inline-flex items-center min-h-11 pointer-fine:min-h-0 hover:text-[#C9A24B] transition-colors">
               Collection
             </a>
-            <a href="#services" className="hover:text-[#C9A24B] transition-colors">
+            <a href="#services" className="inline-flex items-center min-h-11 pointer-fine:min-h-0 hover:text-[#C9A24B] transition-colors">
               Services
             </a>
-            <a href="#armoured" className="hover:text-[#C9A24B] transition-colors">
+            <a href="#armoured" className="inline-flex items-center min-h-11 pointer-fine:min-h-0 hover:text-[#C9A24B] transition-colors">
               Blindés
             </a>
-            <a href="#contact" className="hover:text-[#C9A24B] transition-colors">
+            <a href="#contact" className="inline-flex items-center min-h-11 pointer-fine:min-h-0 hover:text-[#C9A24B] transition-colors">
               Contact
             </a>
           </nav>
@@ -101,7 +101,7 @@ export default function AutoProDRCPage() {
               href="https://wa.me/243992099990"
               target="_blank"
               rel="noreferrer"
-              className="hidden sm:inline-flex items-center justify-center min-h-11 md:min-h-0 px-4 py-2 text-xs tracking-[0.2em] uppercase text-[#070707] bg-[#C9A24B] hover:bg-[#EBD699] font-semibold transition-all duration-300 shadow-[0_0_20px_rgba(201,162,75,0.2)]"
+              className="hidden sm:inline-flex items-center justify-center min-h-11 pointer-fine:min-h-0 px-4 py-2 text-xs tracking-[0.2em] uppercase text-[#070707] bg-[#C9A24B] hover:bg-[#EBD699] font-semibold transition-all duration-300 shadow-[0_0_20px_rgba(201,162,75,0.2)]"
             >
               WhatsApp Direct
             </a>
@@ -150,7 +150,7 @@ export default function AutoProDRCPage() {
               <button
                 onClick={() => setActiveDossier(null)}
                 aria-label="Fermer la fiche véhicule"
-                className="min-h-11 min-w-11 md:min-h-0 md:min-w-0 text-neutral-400 hover:text-white p-1 text-lg font-mono"
+                className="min-h-11 min-w-11 pointer-fine:min-h-0 pointer-fine:min-w-0 text-neutral-400 hover:text-white p-1 text-lg font-mono"
               >
                 ✕
               </button>
@@ -207,13 +207,13 @@ export default function AutoProDRCPage() {
                       openWhatsApp(activeDossier.name);
                       setActiveDossier(null);
                     }}
-                    className="min-h-11 md:min-h-0 px-4 py-2 bg-[#C9A24B] hover:bg-[#EBD699] text-[#070707] font-semibold uppercase tracking-wider text-[11px]"
+                    className="min-h-11 pointer-fine:min-h-0 px-4 py-2 bg-[#C9A24B] hover:bg-[#EBD699] text-[#070707] font-semibold uppercase tracking-wider text-[11px]"
                   >
                     Contacter sur WhatsApp
                   </button>
                   <button
                     onClick={() => setActiveDossier(null)}
-                    className="min-h-11 md:min-h-0 px-3 py-2 border border-white/20 hover:border-white text-white uppercase tracking-wider text-[11px]"
+                    className="min-h-11 pointer-fine:min-h-0 px-3 py-2 border border-white/20 hover:border-white text-white uppercase tracking-wider text-[11px]"
                   >
                     Fermer
                   </button>

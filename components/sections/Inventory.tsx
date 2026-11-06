@@ -99,7 +99,7 @@ export default function Inventory({ vehicles, onOpen, onContact }: Props) {
                   key={f.key}
                   onClick={() => setFilter(f.key)}
                   aria-pressed={filter === f.key}
-                  className={`min-h-11 md:min-h-0 px-4 py-2 rounded-full transition-all ${
+                  className={`min-h-11 pointer-fine:min-h-0 px-4 py-2 rounded-full transition-all ${
                     filter === f.key ? 'bg-[#C9A24B] text-[#070707] font-semibold' : 'text-[#B5B0A4] hover:text-[#F4F1EA] border border-white/15'
                   }`}
                 >
@@ -120,43 +120,45 @@ export default function Inventory({ vehicles, onOpen, onContact }: Props) {
             {list.map((car, i) => (
               <SpotlightCard
                 key={car.id}
-                className="inv-card group shrink-0 w-full lg:w-[min(58vw,820px)] aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto lg:h-full overflow-hidden luxury-slate-card border border-[#C9A24B]/20 hover:border-[#C9A24B]/60 transition-colors"
+                className="inv-card group shrink-0 w-full lg:w-[min(58vw,820px)] lg:h-full flex flex-col lg:block overflow-hidden luxury-slate-card border border-[#C9A24B]/20 hover:border-[#C9A24B]/60 transition-colors"
               >
-                <Image
-                  src={car.image}
-                  alt={car.name}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 58vw"
-                  className="inv-img object-cover lg:scale-[1.18] transition-[filter] duration-700 group-hover:brightness-110"
-                  referrerPolicy="no-referrer"
-                />
-                <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#070707] via-[#070707]/40 to-black/20" />
-
-                <span aria-hidden="true" className="absolute top-3 left-5 font-display text-[5.5rem] lg:text-[8rem] leading-none font-light text-transparent [-webkit-text-stroke:1px_rgba(244,241,234,0.45)]">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <div className="absolute top-5 right-5 flex items-center gap-2">
-                  <span className="px-2.5 py-1 text-[9px] uppercase tracking-wider font-semibold bg-[#070707]/85 text-[#EBD699] border border-[#C9A24B]/40">{car.status}</span>
-                  <span className="font-mono text-xs text-white/90 bg-black/70 px-2 py-0.5 border border-white/10">{car.year}</span>
+                {/* Photo: on phones it sits on top of the text; on desktop it fills the whole card */}
+                <div className="relative aspect-[16/10] w-full overflow-hidden lg:absolute lg:inset-0 lg:aspect-auto">
+                  <Image
+                    src={car.image}
+                    alt={car.name}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 58vw"
+                    className="inv-img object-cover lg:scale-[1.18] transition-[filter] duration-700 group-hover:brightness-110"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-black/25 lg:from-[#070707] lg:via-[#070707]/40" />
+                  <span aria-hidden="true" className="absolute top-2 left-4 font-display text-[4.5rem] lg:text-[8rem] leading-none font-light text-transparent [-webkit-text-stroke:1px_rgba(244,241,234,0.45)] lg:top-3 lg:left-5">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <div className="absolute top-4 right-4 lg:top-5 lg:right-5 flex items-center gap-2">
+                    <span className="px-2.5 py-1 text-[10px] uppercase tracking-wider font-semibold bg-[#070707]/85 text-[#EBD699] border border-[#C9A24B]/40">{car.status}</span>
+                    <span className="font-mono text-xs text-white/90 bg-black/70 px-2 py-0.5 border border-white/10">{car.year}</span>
+                  </div>
                 </div>
 
-                <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7 lg:p-9">
-                  <div className="flex items-center gap-4 text-[11px] uppercase tracking-wider font-mono text-[#A8A398] mb-2">
+                <div className="relative p-5 sm:p-7 bg-[#0a0a0a] lg:bg-transparent lg:absolute lg:inset-x-0 lg:bottom-0 lg:p-9">
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] uppercase tracking-wider font-mono text-[#A8A398] mb-2">
                     <span>{car.engine}</span>
                     <span className="text-[#C9A24B] font-semibold">{car.power}</span>
                   </div>
                   <h3 className="font-display font-light text-2xl sm:text-3xl lg:text-4xl leading-tight text-[#F4F1EA] max-w-2xl">{car.name}</h3>
-                  <p className="mt-3 text-sm text-[#C5BFB3] max-w-xl leading-relaxed line-clamp-2">{car.description}</p>
+                  <p className="mt-3 text-sm text-[#C5BFB3] max-w-xl leading-relaxed line-clamp-3 lg:line-clamp-2">{car.description}</p>
                   <div className="mt-5 flex flex-wrap items-center gap-3">
                     <button
                       onClick={() => onOpen(car)}
-                      className="min-h-11 md:min-h-0 px-5 py-2.5 text-[11px] tracking-[0.2em] uppercase border border-white/30 hover:border-[#C9A24B] text-[#F4F1EA] hover:text-[#C9A24B] transition-colors"
+                      className="min-h-11 pointer-fine:min-h-0 px-5 py-2.5 text-[11px] tracking-[0.2em] uppercase border border-white/30 hover:border-[#C9A24B] text-[#F4F1EA] hover:text-[#C9A24B] transition-colors"
                     >
                       Voir la fiche
                     </button>
                     <button
                       onClick={() => onContact(car.name)}
-                      className="min-h-11 md:min-h-0 px-5 py-2.5 text-[11px] tracking-[0.2em] uppercase bg-[#C9A24B] hover:bg-[#EBD699] text-[#070707] font-semibold transition-colors"
+                      className="min-h-11 pointer-fine:min-h-0 px-5 py-2.5 text-[11px] tracking-[0.2em] uppercase bg-[#C9A24B] hover:bg-[#EBD699] text-[#070707] font-semibold transition-colors"
                     >
                       Contacter
                     </button>

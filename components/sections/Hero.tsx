@@ -45,6 +45,12 @@ function applyBrandPaint(el: HTMLElement & { model?: { materials: { name: string
   });
 }
 
+/** On narrow screens the car is width-limited, so zoom the camera out (radius x2). */
+function orbitFor(orbit: string, small: boolean) {
+  if (!small) return orbit;
+  return orbit.replace(/(\d+)%$/, (_, r) => `${Number(r) * 2}%`);
+}
+
 const ORBITS = [
   { label: '3/4 Face', orbit: '45deg 75deg 105%', key: '45deg' },
   { label: 'Profil', orbit: '90deg 80deg 110%', key: '90deg' },
@@ -69,7 +75,16 @@ export default function Hero() {
   const mv = useRef<HTMLElement & { cameraOrbit?: string }>(null);
   const [cameraOrbit, setCameraOrbit] = useState('45deg 75deg 105%');
   const [isAutoRotate, setIsAutoRotate] = useState(true);
+  const [small, setSmall] = useState(false);
   const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)');
+    const apply = () => setSmall(mq.matches); // phones: pull the camera back so the whole car fits
+    apply();
+    mq.addEventListener('change', apply);
+    return () => mq.removeEventListener('change', apply);
+  }, []);
 
   useEffect(() => {
     const el = mv.current as (HTMLElement & Parameters<typeof applyBrandPaint>[0] & { loaded?: boolean }) | null;
@@ -82,7 +97,7 @@ export default function Hero() {
 
   const setCamera = (orbit: string) => {
     setCameraOrbit(orbit);
-    if (mv.current) mv.current.cameraOrbit = orbit;
+    if (mv.current) mv.current.cameraOrbit = orbitFor(orbit, small);
   };
 
   useGSAP(
@@ -138,7 +153,7 @@ export default function Hero() {
         />
 
         <div className="relative z-10 h-full max-w-[1600px] mx-auto px-5 sm:px-8 pt-24 md:pt-28">
-          <div className="h-fade flex items-center justify-between text-[11px] tracking-[0.25em] uppercase text-[#C9A24B] font-semibold">
+          <div className="h-fade flex items-center justify-between gap-3 text-[11px] tracking-[0.16em] sm:tracking-[0.25em] uppercase text-[#C9A24B] font-semibold">
             <span className="flex items-center gap-2">
               <span className="w-6 h-[1.5px] bg-[#C9A24B]" />
               Lubumbashi — Haut-Katanga
@@ -149,7 +164,7 @@ export default function Hero() {
             </span>
           </div>
 
-          <h1 className="mt-5 font-display uppercase font-light leading-[0.9] tracking-[-0.03em] text-[clamp(2.9rem,9.6vw,11rem)]">
+          <h1 className="mt-5 font-display uppercase font-light leading-[0.9] tracking-[-0.03em] text-[clamp(2.2rem,11.8vw,5rem)] md:text-[clamp(2.9rem,9.6vw,11rem)]">
             <span className="h-l1 [filter:drop-shadow(0_0_16px_rgba(7,7,7,0.95))] relative z-0 block overflow-hidden py-[0.04em]">
               <span className="h-line-inner block">L&apos;automobile</span>
             </span>
@@ -162,7 +177,7 @@ export default function Hero() {
           </h1>
 
           {/* The car sits between the type: behind the front lines, in front of the middle one */}
-          <div className="h-car-intro absolute inset-x-0 bottom-0 top-[36%] z-10">
+          <div className="h-car-intro absolute inset-x-0 top-[33%] bottom-[12.5rem] md:bottom-0 md:top-[36%] z-10">
             <div className="h-car w-full h-full">
               {mounted ? (
                 <model-viewer
@@ -176,7 +191,7 @@ export default function Hero() {
                   camera-controls
                   disable-zoom
                   touch-action="pan-y"
-                  camera-orbit={cameraOrbit}
+                  camera-orbit={orbitFor(cameraOrbit, small)}
                   field-of-view="32deg"
                   environment-image="neutral"
                   exposure="1.25"
@@ -224,7 +239,7 @@ export default function Hero() {
               <button
                 key={o.key}
                 onClick={() => setCamera(o.orbit)}
-                className={`min-h-11 md:min-h-0 px-2 py-1 transition-colors ${
+                className={`min-h-11 pointer-fine:min-h-0 px-2 py-1 transition-colors ${
                   cameraOrbit.startsWith(o.key) ? 'bg-[#C9A24B]/20 text-[#C9A24B] border border-[#C9A24B]/40' : 'text-[#A8A398] hover:text-[#F4F1EA]'
                 }`}
               >
@@ -233,7 +248,7 @@ export default function Hero() {
             ))}
             <button
               onClick={() => setIsAutoRotate(!isAutoRotate)}
-              className={`min-h-11 md:min-h-0 px-2 py-1 font-mono ${isAutoRotate ? 'text-[#C9A24B] font-semibold' : 'text-[#8E8A80]'}`}
+              className={`min-h-11 pointer-fine:min-h-0 px-2 py-1 font-mono ${isAutoRotate ? 'text-[#C9A24B] font-semibold' : 'text-[#8E8A80]'}`}
             >
               {isAutoRotate ? '● Rotation' : '○ Pause'}
             </button>

@@ -5,6 +5,7 @@ import SplitHeading from '@/components/SplitHeading';
 import Reveal from '@/components/Reveal';
 import { VEHICLES } from '@/lib/vehicles';
 
+const link = 'flex sm:inline-flex items-center min-h-11 pointer-fine:min-h-0 hover:text-[#C9A24B] transition-colors break-all sm:break-normal';
 const field =
   'w-full bg-transparent border-0 border-b border-[#C9A24B]/40 text-[#F4F1EA] py-3 text-base focus:outline-none focus:border-[#C9A24B] rounded-none transition-colors placeholder:text-neutral-500';
 
@@ -16,19 +17,19 @@ export default function Contact({ onContact }: { onContact: (text: string) => vo
     ['Adresse', '100, Chaussée Laurent Désiré Kabila, Lubumbashi, RDC'],
     ['Téléphone', (
       <>
-        <a href="tel:+243992099990" className="hover:text-[#C9A24B] transition-colors">+243 992 099 990</a>
-        <span className="mx-2 text-neutral-600">/</span>
-        <a href="tel:+243901310000" className="hover:text-[#C9A24B] transition-colors">+243 901 310 000</a>
+        <a href="tel:+243992099990" className={link}>+243 992 099 990</a>
+        <span className="hidden sm:inline mx-2 text-neutral-600">/</span>
+        <a href="tel:+243901310000" className={link}>+243 901 310 000</a>
       </>
     )],
     ['WhatsApp', (
       <>
-        <a href="https://wa.me/243992099990" target="_blank" rel="noreferrer" className="hover:text-[#C9A24B] transition-colors">+243 992 099 990</a>
-        <span className="mx-2 text-neutral-600">/</span>
-        <a href="https://wa.me/243901310000" target="_blank" rel="noreferrer" className="hover:text-[#C9A24B] transition-colors">+243 901 310 000</a>
+        <a href="https://wa.me/243992099990" target="_blank" rel="noreferrer" className={link}>+243 992 099 990</a>
+        <span className="hidden sm:inline mx-2 text-neutral-600">/</span>
+        <a href="https://wa.me/243901310000" target="_blank" rel="noreferrer" className={link}>+243 901 310 000</a>
       </>
     )],
-    ['Email', <a key="m" href="mailto:contact@autopro-rdc.com" className="hover:text-[#C9A24B] transition-colors">contact@autopro-rdc.com</a>],
+    ['Email', <a key="m" href="mailto:contact@autopro-rdc.com" className={link}>contact@autopro-rdc.com</a>],
     ['Horaires', 'Lundi – Samedi : 08h30 – 17h30'],
     ['Villes', 'Lubumbashi • Likasi • Kolwezi'],
   ];
@@ -53,7 +54,7 @@ export default function Contact({ onContact }: { onContact: (text: string) => vo
             <dl>
               {rows.map(([k, v]) => (
                 <div key={k} className="grid grid-cols-[7rem_1fr] sm:grid-cols-[9rem_1fr] gap-4 py-4 border-t border-white/10 text-sm sm:text-base">
-                  <dt className="font-mono text-xs uppercase tracking-wider text-[#C9A24B] pt-1">{k}</dt>
+                  <dt className="font-mono text-xs uppercase tracking-wider text-[#C9A24B] pt-3 sm:pt-1">{k}</dt>
                   <dd className="text-[#F4F1EA]">{v}</dd>
                 </div>
               ))}

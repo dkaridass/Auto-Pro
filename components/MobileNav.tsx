@@ -23,7 +23,7 @@ export default function MobileNav() {
       }
     };
     const onResize = () => {
-      if (window.innerWidth >= 768) setOpen(false);
+      if (window.innerWidth >= 1024) setOpen(false);
     };
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
@@ -38,7 +38,7 @@ export default function MobileNav() {
   }, [open]);
 
   return (
-    <div className="md:hidden">
+    <div className="lg:hidden">
       <button
         ref={toggleRef}
         type="button"
